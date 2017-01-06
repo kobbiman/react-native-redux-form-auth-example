@@ -1,0 +1,14 @@
+import React, { PropTypes } from 'react';
+import { TouchableOpacity } from 'react-native';
+
+export default function Button (props) {
+  return (
+    <TouchableOpacity {...props}>
+      {props.children}
+    </TouchableOpacity>
+  );
+}
+
+Button.propTypes = {
+  children: PropTypes.object
+};
