@@ -7,7 +7,13 @@ import InputPassword from './common/InputPassword';
 
 class Login extends Component {
 
+  submit = values => {
+    console.log('submitting form', values)
+  }
+
   render () {
+    const { handleSubmit } = this.props;
+
     return (
       <View style={{marginTop: 10, flex: 1}}>
         <Button
@@ -23,7 +29,7 @@ class Login extends Component {
           <Field name="password" component={InputPassword} />
             <Button
               style={{padding: 10, backgroundColor: '#3b91ac', marginTop: 10}}
-              onPress={ () => {} }
+              onPress={ handleSubmit(this.submit) }
             >
               <Text style={{color: '#fff', alignSelf: 'center'}}>Login</Text>
             </Button>
@@ -35,5 +41,18 @@ class Login extends Component {
 }
 
 export default reduxForm({
-  form: 'login'
+  form: 'login',
+  validate: values => {
+   const errors = {};
+
+   if (!values.email) {
+     errors.email = 'Email is required.';
+   }
+
+   if (!values.password) {
+     errors.password = 'Password is required.';
+   }
+
+   return errors;
+ }
 })(Login)
