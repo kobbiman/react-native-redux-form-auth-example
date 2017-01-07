@@ -41,7 +41,7 @@ export const signupUser = ({firstname, surname, email, password}) => {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ firstname, surname, email, password })
+      body: JSON.stringify({ firstname, surname, email: email.toLowerCase(), password })
     })
     .then((response) => {
       response.json()
@@ -49,19 +49,16 @@ export const signupUser = ({firstname, surname, email, password}) => {
           //our server custom error appears here when email is in use and not in catch
           dispatch(signupUserSuccess(data));
           if (data.token) {
-            console.log('DATA', data);
             storeToken(data.token);
             const navigatorUID = store.getState().navigation.currentNavigatorUID;
             dispatch(NavigationActions.push(navigatorUID, Router.getRoute('private')));
           } else {
             dispatch(signupUserFailure(data.error));
           }
-        });
+        })
+        .catch(err => dispatch(signupUserFailure(err)));
     })
-    .catch((error) => {
-      console.log('ERROR', error);
-      dispatch(signupUserFailure(error));
-    });
+    .catch(err => dispatch(signupUserFailure(err)));
   };
 }
 
