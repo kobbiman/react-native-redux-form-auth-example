@@ -7,7 +7,13 @@ import InputPassword from './common/InputPassword';
 
 class Signup extends Component {
 
+  submit = values => {
+    console.log('submitting form', values);
+  }
+
   render () {
+    const { handleSubmit } = this.props;
+
     return (
       <View style={{marginTop: 10, flex: 1}}>
         <Button
@@ -19,7 +25,7 @@ class Signup extends Component {
         <View style={{flexDirection: 'column', flex: 1, padding: 10, marginTop: 50 }}>
 
           <Text>Firstname</Text>
-          <Field name="name" component={Input} />
+          <Field name="firstname" component={Input} />
 
           <Text>Surname</Text>
           <Field name="surname" component={Input} />
@@ -31,11 +37,11 @@ class Signup extends Component {
           <Field name="password" component={InputPassword} />
 
           <Text>Confirm Password</Text>
-          <Field name="password" component={InputPassword} />
+          <Field name="confirmPassword" component={InputPassword} />
 
           <Button
             style={{padding: 10, backgroundColor: '#3b91ac', marginTop: 10}}
-            onPress={ () => {} }
+            onPress={ handleSubmit(this.submit) }
           >
             <Text style={{color: '#fff', alignSelf: 'center'}}>Signup</Text>
           </Button>
@@ -47,5 +53,36 @@ class Signup extends Component {
 }
 
 export default reduxForm({
-  form: 'signup'
+  form: 'signup',
+  validate: values => {
+   const errors = {};
+
+   if (!values.firstname) {
+     errors.firstname = 'Firstname is required.';
+   }
+
+   if (!values.surname) {
+     errors.surname = 'Surname is required.';
+   }
+
+   if (!values.email) {
+     errors.email = 'Email is required.';
+   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+     errors.email = 'Invalid email address';
+   }
+
+   if (!values.password) {
+     errors.password = 'Password is required.';
+   }
+
+   if (!values.confirmPassword) {
+    errors.confirmPassword = 'Confirm password is required';
+  }
+
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords must match';
+  }
+
+   return errors;
+ }
 })(Signup)
