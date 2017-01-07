@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 
 const styles = {
   input: {
@@ -13,9 +13,12 @@ const styles = {
   }
 };
 
-const Input = ({ input: { onChange, ...restInput }}) => {
+const Input = ({ input: { onChange, ...restInput }, meta: { touched, error }}) => {
   return (
-    <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
+    <View>
+      <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
+      { touched && error && <Text style={{ color: '#f53907'}}>{ error }</Text> }
+    </View>
   );
 }
 
