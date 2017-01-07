@@ -9,6 +9,13 @@ class Signup extends Component {
 
   submit = values => {
     console.log('submitting form', values);
+    this.props.signupUser(values);
+  }
+
+  renderServerError = () => {
+    if (this.props.errorMessage) {
+      return <Text style={{color: 'red'}}>{this.props.errorMessage}</Text>
+    }
   }
 
   render () {
@@ -38,6 +45,8 @@ class Signup extends Component {
 
           <Text>Confirm Password</Text>
           <Field name="confirmPassword" component={InputPassword} />
+
+          {this.renderServerError()}
 
           <Button
             style={{padding: 10, backgroundColor: '#3b91ac', marginTop: 10}}
