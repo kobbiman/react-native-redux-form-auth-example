@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Intro from './components/Intro';
 import Login from './components/Login';
-import Signup from './components/Signup';
+import Signup from './containers/Signup';
 import Private from './components/Private';
 
-const Router = createRouter(() => ({
+export const Router = createRouter(() => ({
   intro: () => Intro,
   login: () => Login,
   signup: () => Signup,
