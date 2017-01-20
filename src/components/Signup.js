@@ -38,7 +38,7 @@ class Signup extends Component {
           <Field name="surname" component={Input} />
 
           <Text>Email</Text>
-          <Field name="email" component={Input} />
+          <Field name="email" component={Input} isEmail />
 
           <Text>Password</Text>
           <Field name="password" component={InputPassword} />

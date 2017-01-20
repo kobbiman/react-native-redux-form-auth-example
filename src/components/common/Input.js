@@ -13,11 +13,16 @@ const styles = {
   }
 };
 
-const Input = ({ input: { onChange, ...restInput }, meta: { touched, error }}) => {
+const Input = ({ isEmail, input: { onChange, ...restInput }, meta: { touched, error }}) => {
   return (
     <View>
-      <TextInput style={styles.input} onChangeText={onChange} {...restInput} />
-      { touched && error && <Text style={{ color: '#f53907'}}>{ error }</Text> }
+      <TextInput
+        autoCapitalize={ isEmail && "none" }
+        style={styles.input}
+        onChangeText={onChange}
+        {...restInput}
+      />
+        { touched && error && <Text style={{ color: '#f53907'}}>{ error }</Text> }
     </View>
   );
 }

@@ -24,7 +24,7 @@ class Login extends Component {
         </Button>
         <View style={{flexDirection: 'column', flex: 1, padding: 10, marginTop: 50 }}>
           <Text>Email</Text>
-          <Field name="email" component={Input} />
+          <Field name="email" component={Input} isEmail />
           <Text>Password</Text>
           <Field name="password" component={InputPassword} />
             <Button

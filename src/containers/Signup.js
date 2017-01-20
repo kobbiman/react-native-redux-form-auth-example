@@ -3,7 +3,6 @@ import Signup from '../components/Signup';
 import { signupUser } from '../redux/signup';
 
 function mapStateToProps({ signup }) {
-  console.log('map state to props', signup);
   return {
     isSigningUp: signup.isSigningUp,
     errorMessage: signup.error
