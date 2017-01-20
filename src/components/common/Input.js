@@ -13,11 +13,11 @@ const styles = {
   }
 };
 
-const Input = ({ isEmail, input: { onChange, ...restInput }, meta: { touched, error }}) => {
+const Input = ({ input: { onChange, ...restInput }, meta: { touched, error }}) => {
   return (
     <View>
       <TextInput
-        autoCapitalize={ isEmail && "none" }
+        autoCapitalize={ restInput.name === "email" ? "none" : "words" }
         style={styles.input}
         onChangeText={onChange}
         {...restInput}
